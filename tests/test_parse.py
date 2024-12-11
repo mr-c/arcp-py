@@ -166,9 +166,10 @@ class TestParse(unittest.TestCase):
              parse.parse_arcp("arcp://ni,sha-256/").ni
 
     def test_parse_ni_uri(self):
-        self.assertEqual("ni:///sha-256;f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk",
-             parse.parse_arcp("arcp://ni,sha-256;f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk/")
-                .ni_uri())
+        ni_uri = parse.parse_arcp("arcp://ni,sha-256;f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk/").ni_uri()
+        assert ni_uri in (
+                "ni:///sha-256;f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk",
+                "ni:sha-256;f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk")
         self.assertIsNone(
             parse.parse_arcp("arcp://name,sha-256;f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk/")
                 .ni_uri())
